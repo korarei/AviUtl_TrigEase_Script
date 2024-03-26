@@ -1,0 +1,97 @@
+--[[
+    @三角関数移動.tra
+    基準_CurveEditorのType@三角関数移動とメニューに表示される。
+
+    軸基準：軸スタート、90度ずつ中間点を打って指定
+    四隅基準：四隅スタート、180度ずつ中間点を打って指定
+
+    CurveEditorのTypeとパラメータはCurveEditorと同じ
+
+    加減速チェック
+    なし：x=cos、y=sin、zは直線移動のように動く
+    両方チェック：なしのxyを入れ替える
+    加速：cosっぽい動き
+    減速：sinっぽい動き
+
+    by Korarei
+]]--
+
+
+@軸_Type1
+--param:0
+--speed:0,0
+
+package.path = package.path..";"..obj.getinfo("script_path"):gsub("[^\\]+\\$", "?.lua")
+local trig_ease = require("trig_ease")
+local i, x = math.modf(obj.getpoint("index"))
+local s, e = obj.getpoint(i), obj.getpoint(i+1)
+local par = obj.getpoint("param")
+local index = obj.getpoint("link")
+
+if (not obj.getpoint("accelerate") and not obj.getpoint("decelerate") and index == 0) or (obj.getpoint("accelerate") and obj.getpoint("decelerate") and index == 1) or (obj.getpoint("accelerate") and not obj.getpoint("decelerate")) then
+    return trig_ease.ease(0, 0, 1, par, x, s, e, i)
+elseif (not obj.getpoint("accelerate") and not obj.getpoint("decelerate") and index == 1) or (obj.getpoint("accelerate") and obj.getpoint("decelerate") and index == 0) or (not obj.getpoint("accelerate") and obj.getpoint("decelerate")) then
+    return trig_ease.ease(0, 1, 1, par, x, s, e, i)
+else
+    return obj.getpoint("default")
+end
+
+
+@軸_Type2
+--param:0
+--speed:0,0
+
+package.path = package.path..";"..obj.getinfo("script_path"):gsub("[^\\]+\\$", "?.lua")
+local trig_ease = require("trig_ease")
+local i, x = math.modf(obj.getpoint("index"))
+local s, e = obj.getpoint(i), obj.getpoint(i+1)
+local par = obj.getpoint("param")
+local index = obj.getpoint("link")
+
+if (not obj.getpoint("accelerate") and not obj.getpoint("decelerate") and index == 0) or (obj.getpoint("accelerate") and obj.getpoint("decelerate") and index == 1) or (obj.getpoint("accelerate") and not obj.getpoint("decelerate")) then
+    return trig_ease.ease(0, 0, 2, par, x, s, e, i)
+elseif (not obj.getpoint("accelerate") and not obj.getpoint("decelerate") and index == 1) or (obj.getpoint("accelerate") and obj.getpoint("decelerate") and index == 0) or (not obj.getpoint("accelerate") and obj.getpoint("decelerate")) then
+    return trig_ease.ease(0, 1, 2, par, x, s, e, i)
+else
+    return obj.getpoint("default")
+end
+
+
+@四隅_Type1
+--param:0
+--speed:0,0
+
+package.path = package.path..";"..obj.getinfo("script_path"):gsub("[^\\]+\\$", "?.lua")
+local trig_ease = require("trig_ease")
+local i, x = math.modf(obj.getpoint("index"))
+local s, e = obj.getpoint(i), obj.getpoint(i+1)
+local par = obj.getpoint("param")
+local index = obj.getpoint("link")
+
+if (not obj.getpoint("accelerate") and not obj.getpoint("decelerate") and index == 0) or (obj.getpoint("accelerate") and obj.getpoint("decelerate") and index == 1) or (obj.getpoint("accelerate") and not obj.getpoint("decelerate")) then
+    return trig_ease.ease(1, 0, 1, par, x, s, e)
+elseif (not obj.getpoint("accelerate") and not obj.getpoint("decelerate") and index == 1) or (obj.getpoint("accelerate") and obj.getpoint("decelerate") and index == 0) or (not obj.getpoint("accelerate") and obj.getpoint("decelerate")) then
+    return trig_ease.ease(1, 1, 1, par, x, s, e)
+else
+    return obj.getpoint("default")
+end
+
+
+@四隅_Type2
+--param:0
+--speed:0,0
+
+package.path = package.path..";"..obj.getinfo("script_path"):gsub("[^\\]+\\$", "?.lua")
+local trig_ease = require("trig_ease")
+local i, x = math.modf(obj.getpoint("index"))
+local s, e = obj.getpoint(i), obj.getpoint(i+1)
+local par = obj.getpoint("param")
+local index = obj.getpoint("link")
+
+if (not obj.getpoint("accelerate") and not obj.getpoint("decelerate") and index == 0) or (obj.getpoint("accelerate") and obj.getpoint("decelerate") and index == 1) or (obj.getpoint("accelerate") and not obj.getpoint("decelerate")) then
+    return trig_ease.ease(1, 0, 2, par, x, s, e)
+elseif (not obj.getpoint("accelerate") and not obj.getpoint("decelerate") and index == 1) or (obj.getpoint("accelerate") and obj.getpoint("decelerate") and index == 0) or (not obj.getpoint("accelerate") and obj.getpoint("decelerate")) then
+    return trig_ease.ease(1, 1, 2, par, x, s, e)
+else
+    return obj.getpoint("default")
+end
